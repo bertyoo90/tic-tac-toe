@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Tic-Tac-Toe</title>
+</head>
+<body>
+    <div id="container">
+        <div id="p1-box">
+            Player 1
+        </div>
+
+        <div id="game-board">
+            <div class="game-square" id="top-left"></div>
+            <div class="game-square" id="top-mid"></div>
+            <div class="game-square" id="top-right"></div>
+            <div class="game-square" id="mid-left"></div>
+            <div class="game-square" id="mid-mid"></div>
+            <div class="game-square" id="mid-right"></div>
+            <div class="game-square" id="bot-left"></div>
+            <div class="game-square" id="bot-mid"></div>
+            <div class="game-square" id="bot-right"></div>
+        </div>
+
+        <div id="p2-box">
+            Player 2
+        </div>
+
+    </div>
+<script>
+ 
+    let ticTacToeBoard = (function(){
+        let topLeft = document.querySelector('#top-left')
+        let topMid = document.querySelector('#top-mid')
+        let topRight = document.querySelector('#top-right')
+        let midLeft = document.querySelector('#mid-left')
+        let midMid = document.querySelector('#mid-mid')
+        let midRight = document.querySelector('#mid-right')
+        let botLeft = document.querySelector('#bot-left')
+        let botMid = document.querySelector('#bot-mid')
+        let botRight = document.querySelector('#bot-right')
+        let gameBoard = []
+   
+
+        function gridSquares(){
+            gameBoard = [topLeft, topMid, topRight, midLeft, midMid, midRight, botLeft, botMid, botRight]
+            // let gridSquares = cacheDom
+            // // let gridSquares = document.querySelectorAll('.game-square')
+            // let squares = [...gridSquares]
+            for(let square of gameBoard){
+                square.textContent = ''
+            }
+        }
+
+        gridSquares()
+
+        return {gridSquares, gameBoard}
+})()
+
+        const Player = function(name, move){
+            const boardMove = () => {
+                
+            }
+            return{name, move, boardMove}
+        }
+
+        let playerMoves = (function(){
+            const playerOne = Player('player-one', 1)
+            const playerTwo = Player('player-two', 2)
+
+        
+
+        for(let place of ticTacToe.gameBoard){
+            place.addEventListener('click', function(e){
+                //Need a classlist.add for centering and resizing text
+                e.target.textContent = 'o'
+            })
+        }
+    })()
+
+
+
+
+</script>
+</body>
+</html>
+
+<!-- git remote add origin git@github.com:bertyoo90/tic-tac-toe.git -->
