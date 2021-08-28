@@ -31,7 +31,7 @@
 
     </div>
 <script>
- 
+    //Tic-Tac-Toe board pieces and DOM elements
     let ticTacToeBoard = (function(){
         let topLeft = document.querySelector('#top-left')
         let topMid = document.querySelector('#top-mid')
@@ -45,8 +45,10 @@
         let gameBoard = []
    
 
-        function gridSquares(){
-            gameBoard = [topLeft, topMid, topRight, midLeft, midMid, midRight, botLeft, botMid, botRight]
+        let gridSquares = () => {
+            gameBoard = [topLeft, topMid, topRight, 
+                        midLeft, midMid, midRight, 
+                        botLeft, botMid, botRight]
             // let gridSquares = cacheDom
             // // let gridSquares = document.querySelectorAll('.game-square')
             // let squares = [...gridSquares]
@@ -59,27 +61,42 @@
 
         return {gridSquares, gameBoard}
 })()
-
-        const Player = function(name, move){
+        //Player factory function
+        const Player = function(name, move, marker){
             const boardMove = () => {
-                
-            }
-            return{name, move, boardMove}
-        }
-
-        let playerMoves = (function(){
-            const playerOne = Player('player-one', 1)
-            const playerTwo = Player('player-two', 2)
-
-        
-
-        for(let place of ticTacToe.gameBoard){
-            place.addEventListener('click', function(e){
-                //Need a classlist.add for centering and resizing text
-                e.target.textContent = 'o'
+                for(let place of ticTacToeBoard.gameBoard){
+                place.addEventListener('click', function(e){
+                e.target.textContent = marker
             })
         }
-    })()
+            }
+            return{name, move, boardMove, marker}
+        }
+        //Logic that creates player moves for both players
+        let playerMoves = (function(){
+            let turn = true;
+            const playerOne = Player('player-one', 1, 'X')
+            const playerTwo = Player('player-two', 2, 'O')
+
+            if(turn) {
+                playerOne.boardMove()
+            }else {
+                playerTwo.boardMove()
+            }
+            turn = false
+                
+ 
+            return {playerOne, playerTwo}
+        
+        })()
+
+
+        let game = (function(){
+            
+
+
+        })()
+    
 
 
 
