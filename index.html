@@ -69,6 +69,7 @@
                 for (let place of ticTacToeBoard.gameBoard){
                 place.addEventListener('click', function(e){
                 e.target.textContent = marker
+                console.log(e.target.indexOf(ticTacToeBoard.gameBoard))
             })
         }
     }
@@ -80,27 +81,38 @@
         //Logic that creates player moves for both players
         let playerMoves = (function(){
             let turn = true;
+            let isSlotTaken = false;
             const playerOne = Player('player-one', 1, 'X')
             const playerTwo = Player('player-two', 2, 'O')
 
             //Function that alternates players turns
-            function markBoard(){
-                // console.log(turn)
+            const markBoard = () => {
+            //   if(!isSlotTaken){
                 if(turn) {
                   turn = false; 
                   return playerOne.boardMove()       
                 } else {
                    turn = true;
                    return playerTwo.boardMove()
+                // } if(ticTacToeBoard.gameBoard[0] === 'X' || ticTacToeBoard.gameBoard[0] === 'O') {
+                //     isSlotTaken = true;
+                // }
+            }
+        }
+            
+            const playerTurn = () => {
+                for (let squares of ticTacToeBoard.gameBoard){
+                    squares.addEventListener('click', markBoard)
                 }
             }
-            
+
             markBoard()
-                
- 
+            playerTurn()
+
             return {playerOne, 
                     playerTwo, 
-                    markBoard}
+                    markBoard,
+                    playerTurn}
         
         })()
 
