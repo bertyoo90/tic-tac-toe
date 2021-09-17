@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src=script.js></script>
     <title>Tic-Tac-Toe</title>
 </head>
 <body>
@@ -30,101 +31,7 @@
         </div>
 
     </div>
-<script>
-    //Tic-Tac-Toe board pieces and DOM elements
-    let ticTacToeBoard = (function(){
-        'use strict';
-        let topLeft = document.querySelector('#top-left')
-        let topMid = document.querySelector('#top-mid')
-        let topRight = document.querySelector('#top-right')
-        let midLeft = document.querySelector('#mid-left')
-        let midMid = document.querySelector('#mid-mid')
-        let midRight = document.querySelector('#mid-right')
-        let botLeft = document.querySelector('#bot-left')
-        let botMid = document.querySelector('#bot-mid')
-        let botRight = document.querySelector('#bot-right')
-        let gameBoard = []
-   
 
-        let _gridSquares = () => {
-            //gameBoard will become available publicly
-            gameBoard = [topLeft, topMid, topRight, 
-                        midLeft, midMid, midRight, 
-                        botLeft, botMid, botRight]
-
-            for (let square of gameBoard){
-                square.textContent = ''
-            }
-        }
-
-        _gridSquares()
-
-        return {gameBoard} 
-            
-})()
-        //Player factory function
-        const Player = function(name, move, marker){
-            
-            const boardMove = () => {
-                for (let place of ticTacToeBoard.gameBoard){
-                place.addEventListener('click', function(e){
-                e.target.textContent = marker
-                console.log(e.target.indexOf(ticTacToeBoard.gameBoard))
-            })
-        }
-    }
-            return {name,
-                   move, 
-                   boardMove, 
-                   marker}
-        }
-        //Logic that creates player moves for both players
-        let playerMoves = (function(){
-            let turn = true;
-            let isSlotTaken = false;
-            const playerOne = Player('player-one', 1, 'X')
-            const playerTwo = Player('player-two', 2, 'O')
-
-            //Function that alternates players turns
-            const markBoard = () => {
-            //   if(!isSlotTaken){
-                if(turn) {
-                  turn = false; 
-                  return playerOne.boardMove()       
-                } else {
-                   turn = true;
-                   return playerTwo.boardMove()
-                // } if(ticTacToeBoard.gameBoard[0] === 'X' || ticTacToeBoard.gameBoard[0] === 'O') {
-                //     isSlotTaken = true;
-                // }
-            }
-        }
-            
-            const playerTurn = () => {
-                for (let squares of ticTacToeBoard.gameBoard){
-                    squares.addEventListener('click', markBoard)
-                }
-            }
-
-            markBoard()
-            playerTurn()
-
-            return {playerOne, 
-                    playerTwo, 
-                    markBoard,
-                    playerTurn}
-        
-        })()
-
-
-        let game = (function(){
-        })()
-    
-
-
-
-
-</script>
 </body>
 </html>
 
