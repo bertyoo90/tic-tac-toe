@@ -89,7 +89,8 @@
                     playerTwo, 
                     markBoard,
                     turn,
-                    isGameOver}
+                    isGameOver,
+                    checkWin}
 
         
         })()
