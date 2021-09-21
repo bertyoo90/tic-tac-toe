@@ -1,7 +1,20 @@
+* {
+    font-family: 'Grechen Fuemen', cursive;
+}
+
+#title {
+    font-size: 50px;
+    text-align: center;
+}
+
+#winner-display{
+    padding-top: 50px;
+    text-align: center;
+}
 #container {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
     margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
 }
 
 #container h1 {
@@ -9,23 +22,26 @@
 }
 
 #p1-box {
-    /* background-color: lightgray; */
+    text-align: center;
 }
 
 #p2-box {
-    /* background-color: lightgray; */
+    text-align: center;
 }
 
 #game-board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
     background-color: lightcyan;
 }
 
 .game-square {
     background-color: lightgray;
     border: 2px solid black;
-    height: 200px;
+    height: 160px;
+    place-items: center;
 }
 
 #top-left, #top-mid, #top-right{

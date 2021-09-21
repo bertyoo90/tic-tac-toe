@@ -1,80 +1,75 @@
 
     'use strict';
+   //Player factory function
+   const Player = function(name, move, marker, winStatus, score){
     
+    return {name, move, marker, winStatus, score}
+}   
+
+
     //Tic-Tac-Toe board pieces and DOM elements
     let ticTacToeBoard = (function(){
 
-            topLeft= document.querySelector('#top-left'),
-            topMid= document.querySelector('#top-mid'),
-            topRight= document.querySelector('#top-right'),
-            midLeft= document.querySelector('#mid-left'),
-            midMid= document.querySelector('#mid-mid'),
-            midRight= document.querySelector('#mid-right'),
-            botLeft= document.querySelector('#bot-left'),
-            botMid= document.querySelector('#bot-mid'),
-            botRight= document.querySelector('#bot-right'),
-            gameBoard= [topLeft, topMid, topRight,
-                        midLeft, midMid, midRight,
-                        botLeft, botMid, botRight],
+            let board = document.querySelectorAll('.game-square')
+            let gameBoard = [...board]
 
-            winningCombination=
-                        [[topLeft, topMid, topRight],
-                        [midLeft, midMid, midRight],
-                        [botLeft, botMid, botRight],
-                        [topLeft, midLeft, botLeft],
-                        [topMid, midMid, botMid],
-                        [topRight, midRight, botRight],
-                        [topLeft, midMid, botRight],
-                        [topRight, midMid, botLeft]]
-        
-        
-            
-
+            let winningCombination= [
+                                  [gameBoard[0], gameBoard[1], gameBoard[2]],
+                                  [gameBoard[3], gameBoard[4], gameBoard[5]],
+                                  [gameBoard[6], gameBoard[7], gameBoard[8]],
+                                  [gameBoard[1], gameBoard[4], gameBoard[7]],
+                                  [gameBoard[2], gameBoard[5], gameBoard[8]],
+                                  [gameBoard[0], gameBoard[4], gameBoard[8]],
+                                  [gameBoard[2], gameBoard[4], gameBoard[6]]
+                                ]
+                      
         return {gameBoard, winningCombination} 
             
 })()
-        //Player factory function
-        const Player = function(name, move, marker, winStatus, score){
-    
-            return {name, move, marker, winStatus, score}
-        }
-
+      
         //Logic that creates player moves for both players
-        let playerMoves = (function(){
+        let displayController = (function(){
+
             //Object that stores components of the game
             const gameObj = {
+            displayWinner: document.querySelector('#winner-display'),
+            playerOneScore: document.querySelector('#p1-score'),
+            playerTwoScore: document.querySelector('#p1-score'),
             isGameOver: false,
             turn: true,
-            playerOne: Player('player-one', 1, 'X', false),
-            playerTwo: Player('player-two', 2, 'O', false)
+            playerOne: Player('player-one', 1, 'X', false, 0),
+            playerTwo: Player('player-two', 2, 'O', false, 0)
             }
             
             let checkWin = () => {
-                for (let x of ticTacToeBoard.board.winningCombination) {
+                for (let x of ticTacToeBoard.winningCombination) {
                     if (x.every(i => i.textContent === gameObj.playerOne.marker)) {
-                        alert('player one wins!');
                         gameObj.isGameOver = true;
                         gameObj.playerOne.winStatus = true;
-                        console.log(gameObj.isGameOver)
+                        gameObj.playerOne.score += 1
+                        gameObj.displayWinner.textContent = 'Player 1 Wins!'
+                        gameObj.playerOneScore.textContent = gameObj.playerOne.score
                         return gameObj.isGameOver
                     } else if (x.every(i => i.textContent === gameObj.playerTwo.marker)) {
-                        alert('player two wins!');
                         gameObj.isGameOver = true;
                         gameObj.playerTwo.winStatus = true;
-                        console.log(gameObj.isGameOver)
+                        gameObj.playerTwo.score += 1
+                        gameObj.displayWinner.textContent = 'Player 2 Wins!'
+                        gameObj.playerTwoScore.textContent = gameObj.playerTwo.score
                         return gameObj.isGameOver
                     }
                   }
                 }
+
+                // gameObj.playerOneScore.textContent = gameObj.playerOne.score
+                // gameObj.playerTwoScore.textContent = gameObj.playerTwo.score
            
             
             //Function that alternates players turns
             let markBoard = () => {
-                ticTacToeBoard.board.winningCombination;  
-                for (let place of ticTacToeBoard.board.gameBoard) {
+                ticTacToeBoard.winningCombination;  
+                for (let place of ticTacToeBoard.gameBoard) {
                     place.addEventListener('click', function(e){
-                    //   let p = e.target.parentElement
-                    //   let index = Array.prototype.indexOf.call(p.children, e.target)
                       if (e.target.textContent == '' && !gameObj.isGameOver){
                         if (gameObj.turn) {
                           gameObj.turn = false; 
@@ -98,33 +93,41 @@
             return {markBoard,
                     checkWin,
                     gameObj}
-
-        
         })()
 
 
-        // let game = (function(){
-        //     let endGame = false
-        //     let board = ticTacToeBoard.gameBoard
+        let gameOver = (function(){
+            let resetButton = document.querySelector('#reset-game')
+            let nextRound = document.querySelector('#next-round')
+            let board = ticTacToeBoard.gameBoard
 
-        //     function restartGame() {
-        //         for (squares of board){
-        //             board.textContent = ''
-        //         }
-        //     }
+            let restartGame = () => {
+                for (let square of board){
+                  square.textContent = ''
+                }
+                displayController.gameObj.playerOne.winStatus = false;
+                displayController.gameObj.playerOne.score = 0;
+                displayController.gameObj.playerTwo.winStatus = false;
+                displayController.gameObj.playerTwo.score = 0;
+                displayController.gameObj.isGameOver = false;
+                displayController.gameObj.displayWinner.textContent = ''
+            }
+
+            let nextRd = () => {
+                for (let square of board) {
+                  square.textContent = ''
+                }
+                displayController.gameObj.isGameOver = false;
+                displayController.gameObj.playerOne.winStatus = false;
+                displayController.gameObj.playerTwo.winStatus = false;
+                displayController.gameObj.displayWinner.textContent = ''
+            }
+
+              resetButton.addEventListener('click', restartGame)
+              nextRound.addEventListener('click', nextRd)
+
+              return {restartGame,
+                     resetButton,
+                     nextRound}
             
-        //     function winnerAnnouncement() {
-        //     //     playerMoves.playerOne.score = 0
-        //     //     playerMoves.playerTwo.score = 0
-        //     //     if (playerMoves.playerOne.winStatus = true){
-        //     //         playerMoves.playerOne.score += 1
-        //     //     } if (playerMoves.playerTwo.winStatus = true){
-        //     //         playerMoves.playerTwo.score += 1
-        //     //     }
-        //     // }
-
-        //     winnerAnnouncement()
-
-        //     return {winnerAnnouncement}
-            
-        // })()
+        })()
