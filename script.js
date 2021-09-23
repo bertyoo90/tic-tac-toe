@@ -23,7 +23,7 @@
                                   [gameBoard[2], gameBoard[4], gameBoard[6]]
                                 ]
                       
-        return {gameBoard, winningCombination} 
+        return {board, gameBoard, winningCombination} 
             
 })()
       
@@ -34,13 +34,27 @@
             const gameObj = {
             displayWinner: document.querySelector('#winner-display'),
             playerOneScore: document.querySelector('#p1-score'),
-            playerTwoScore: document.querySelector('#p1-score'),
+            playerTwoScore: document.querySelector('#p2-score'),
             isGameOver: false,
             turn: true,
             playerOne: Player('player-one', 1, 'X', false, 0),
             playerTwo: Player('player-two', 2, 'O', false, 0)
             }
+
+
+            //Logic that displays the current player
+
+            let currentPlayer = () => {
+                if (gameObj.turn) {
+                  gameObj.displayWinner.textContent = "X's Turn"
+                  return gameObj.turn
+                } else if (!gameObj.turn) {
+                  gameObj.displayWinner.textContent = "O's Turn"
+                  return gameObj.turn
+                }
+            }
             
+            //Logic that checks for three in a row
             let checkWin = () => {
                 for (let x of ticTacToeBoard.winningCombination) {
                     if (x.every(i => i.textContent === gameObj.playerOne.marker)) {
@@ -57,14 +71,19 @@
                         gameObj.displayWinner.textContent = 'Player 2 Wins!'
                         gameObj.playerTwoScore.textContent = gameObj.playerTwo.score
                         return gameObj.isGameOver
-                    }
+                    } 
                   }
                 }
 
-                // gameObj.playerOneScore.textContent = gameObj.playerOne.score
-                // gameObj.playerTwoScore.textContent = gameObj.playerTwo.score
-           
-            
+            // let drawGame = () => {
+            //   for (let x of ticTacToeBoard.board) {
+            //     if (x.every(m => m.textContent = gameObj.playerOne.marker)) {
+                   
+            //     } 
+            //   }
+            // }
+                      
+
             //Function that alternates players turns
             let markBoard = () => {
                 ticTacToeBoard.winningCombination;  
@@ -74,12 +93,16 @@
                         if (gameObj.turn) {
                           gameObj.turn = false; 
                           e.target.textContent = gameObj.playerOne.marker
+                          currentPlayer()
                           checkWin()
+                          // drawGame()
                           return gameObj.turn;
                         } else if (!gameObj.turn){
                           gameObj.turn = true;
                           e.target.textContent = gameObj.playerTwo.marker 
+                          currentPlayer()
                           checkWin()
+                          // drawGame()
                           return gameObj.turn;
                         }
                       } 
@@ -88,11 +111,13 @@
                 
             }
 
+            currentPlayer()
             markBoard()
 
             return {markBoard,
                     checkWin,
-                    gameObj}
+                    gameObj,
+                    currentPlayer}
         })()
 
 
@@ -106,9 +131,11 @@
                   square.textContent = ''
                 }
                 displayController.gameObj.playerOne.winStatus = false;
-                displayController.gameObj.playerOne.score = 0;
                 displayController.gameObj.playerTwo.winStatus = false;
+                displayController.gameObj.playerOne.score = 0;
                 displayController.gameObj.playerTwo.score = 0;
+                displayController.gameObj.playerOneScore.textContent = displayController.gameObj.playerOne.score
+                displayController.gameObj.playerTwoScore.textContent = displayController.gameObj.playerTwo.score
                 displayController.gameObj.isGameOver = false;
                 displayController.gameObj.displayWinner.textContent = ''
             }

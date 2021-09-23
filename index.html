@@ -15,8 +15,8 @@
     <div id="title">Tic-Tac-Toe</div>
     <div id="winner-display"></div>
     <div id="container">
-        <div id="p1-box">Player 1
-            <div>Score: 
+        <div id="p1-box" class="p">Player 1
+            <div class="p">Score: 
                 <div id="p1-score"></div>
             </div>
         </div>
@@ -33,15 +33,17 @@
             <div class="game-square" id="8" data-grid="8"></div>
         </div>
 
-        <div id="p2-box">Player 2
-            <div>Score: 
+        <div id="p2-box" class="p">Player 2
+            <div class="p">Score: 
                 <div id="p2-score"></div>
             </div>
         </div>
 
     </div>
-    <button id="next-round">NEW ROUND</button>
-    <button id="reset-game">RESET GAME</button>
+    <div id="buttons">
+        <button class="buttons" id="next-round">NEW ROUND</button>
+        <button class="buttons" id="reset-game">RESET GAME</button>
+    </div>
 
 </body>
 <script src=script.js></script>

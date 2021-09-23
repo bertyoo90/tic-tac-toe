@@ -2,17 +2,22 @@
     font-family: 'Grechen Fuemen', cursive;
 }
 
+body {
+    background-color: #f7e5ab;
+}
+
 #title {
-    font-size: 50px;
+    font-size: 40px;
     text-align: center;
 }
 
 #winner-display{
-    padding-top: 50px;
+    font-size: 25px;
+    padding-top: 30px;
     text-align: center;
 }
 #container {
-    margin-top: 30px;
+    margin-top: 5px;
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
 }
@@ -29,6 +34,46 @@
     text-align: center;
 }
 
+#p1-box, #p2-box, .p {
+    font-size: 20px;
+}
+
+#buttons{
+    margin-top: 15px;
+    text-align: center;
+}
+
+  .buttons {
+    display: inline-block;
+    /* padding: 0.35em 1.2em; */
+    padding: 12px;
+    background-color: #c8cde6;
+    border: 0.1em solid #fff;
+    margin: 0 0.3em 0.3em 0;
+    border-radius: 0.12em;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 15px;
+    color: black;
+    text-align: center;
+    transition: all 0.2s;
+
+}
+
+  .buttons:hover {
+     color:#000000;
+     background-color:#FFFFFF;
+  }
+
+#next-round {
+    margin-right: 50px;
+}
+
+#reset-game {
+    margin-left: 50px;
+}
+
 #game-board {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -38,9 +83,9 @@
 }
 
 .game-square {
-    background-color: lightgray;
+    background-color: #fff;
     border: 2px solid black;
-    height: 160px;
+    height: 150px;
     place-items: center;
 }
 
