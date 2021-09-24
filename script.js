@@ -6,7 +6,6 @@
     return {name, move, marker, winStatus, score}
 }   
 
-
     //Tic-Tac-Toe board pieces and DOM elements
     let ticTacToeBoard = (function(){
 
@@ -23,7 +22,7 @@
                                   [gameBoard[2], gameBoard[4], gameBoard[6]]
                                 ]
                       
-        return {board, gameBoard, winningCombination} 
+        return {gameBoard, winningCombination} 
             
 })()
       
@@ -44,7 +43,7 @@
 
             //Logic that displays the current player
 
-            let currentPlayer = () => {
+            const currentPlayer = () => {
                 if (gameObj.turn) {
                   gameObj.displayWinner.textContent = "X's Turn"
                   return gameObj.turn
@@ -55,7 +54,7 @@
             }
             
             //Logic that checks for three in a row
-            let checkWin = () => {
+            const checkWin = () => {
                 for (let x of ticTacToeBoard.winningCombination) {
                     if (x.every(i => i.textContent === gameObj.playerOne.marker)) {
                         gameObj.isGameOver = true;
@@ -85,7 +84,7 @@
                       
 
             //Function that alternates players turns
-            let markBoard = () => {
+            const markBoard = () => {
                 ticTacToeBoard.winningCombination;  
                 for (let place of ticTacToeBoard.gameBoard) {
                     place.addEventListener('click', function(e){
@@ -119,7 +118,6 @@
                     gameObj,
                     currentPlayer}
         })()
-
 
         let gameOver = (function(){
             let resetButton = document.querySelector('#reset-game')

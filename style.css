@@ -3,7 +3,8 @@
 }
 
 body {
-    background-color: #f7e5ab;
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(77,171,221,1) 74%, rgba(69,131,252,1) 93%); 
 }
 
 #title {
@@ -13,8 +14,12 @@ body {
 
 #winner-display{
     font-size: 25px;
-    padding-top: 30px;
+    padding-top: 20px;
     text-align: center;
+}
+
+#title, #winner-display, .p {
+    color: #fff;
 }
 #container {
     margin-top: 5px;
@@ -83,10 +88,21 @@ body {
 }
 
 .game-square {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    /* backface-visbility: hidden; */
+    -moz-osx-font-smoothing: grayscale;
+    transition-property: transform;
     background-color: #fff;
     border: 2px solid black;
     height: 150px;
     place-items: center;
+}
+
+.game-square:hover, .game-square:focus, .game-square:active {
+    transform: scale(1.03);
 }
 
 #top-left, #top-mid, #top-right{
