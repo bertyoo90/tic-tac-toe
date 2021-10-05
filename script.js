@@ -27,7 +27,7 @@
 })()
       
         //Logic that creates player moves for both players
-        let displayController = (function(){
+    let displayController = (function(){
 
             //Object that stores components of the game
             const gameObj = {
@@ -74,13 +74,13 @@
                   }
                 }
 
-            // let drawGame = () => {
-            //   for (let x of ticTacToeBoard.board) {
-            //     if (x.every(m => m.textContent = gameObj.playerOne.marker)) {
-                   
-            //     } 
-            //   }
-            // }
+            let drawGame = () => {
+              for (let x of ticTacToeBoard.gameBoard) {
+                if (x.every(m => m.textContent === gameObj.playerOne.marker || gameObj.playerTwo.marker)) {
+                   console.log("Its a draw!")
+                } 
+              }
+            }
                       
 
             //Function that alternates players turns
@@ -94,14 +94,14 @@
                           e.target.textContent = gameObj.playerOne.marker
                           currentPlayer()
                           checkWin()
-                          // drawGame()
+                          drawGame()
                           return gameObj.turn;
                         } else if (!gameObj.turn){
                           gameObj.turn = true;
                           e.target.textContent = gameObj.playerTwo.marker 
                           currentPlayer()
                           checkWin()
-                          // drawGame()
+                          drawGame()
                           return gameObj.turn;
                         }
                       } 
@@ -116,7 +116,8 @@
             return {markBoard,
                     checkWin,
                     gameObj,
-                    currentPlayer}
+                    currentPlayer
+                  }
         })()
 
         let gameOver = (function(){
